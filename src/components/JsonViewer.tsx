@@ -24,9 +24,12 @@ const JsonViewer = (props: any) => {
   return (
     <AceEditor
       mode="json"
+      placeholder={props.placeholder || "Enter JSON string here"}
       theme={colorMode === "dark" ? "twilight" : "xcode"}
+      enableBasicAutocompletion={true}
+      tabSize={props.indent || 4}
+      readOnly={props.disabled || false}
       onChange={onChange}
-      name="UNIQUE_ID_OF_DIV"
       editorProps={{ $blockScrolling: true }}
     />
   );
