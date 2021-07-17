@@ -1,4 +1,4 @@
-import { Box, useColorMode, Text } from "@chakra-ui/react";
+import { Box, useColorMode } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-json";
@@ -23,7 +23,6 @@ const JsonEditor = (props: any) => {
   }, [props.src]);
   return (
     <Box {...props}>
-      <Text>{props.title}</Text>
       <AceEditor
         mode="json"
         placeholder={props.placeholder || "Enter JSON string here"}
@@ -35,6 +34,7 @@ const JsonEditor = (props: any) => {
         height="100%"
         width="100%"
         editorProps={{ $blockScrolling: true }}
+        style={{ borderRadius: 10 }}
       />
     </Box>
   );

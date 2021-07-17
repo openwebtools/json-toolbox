@@ -22,10 +22,7 @@ export default function Home() {
         pb={4}
         spacing={["40px", "40px", "20px", "20px"]}
       >
-        <DynamicComponent
-          h="100%"
-          w={["100%", "100%", "100%", "100%"]}
-        ></DynamicComponent>
+        <DynamicComponent h="100%" w="100%"></DynamicComponent>
       </Stack>
     </Layout>
   );
