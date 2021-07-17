@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
 import Layout from "../src/components/Layout";
-const DynamicComponent = dynamic(() => import("../src/components/JsonViewer"), {
+import { Stack, VStack } from "@chakra-ui/react";
+const DynamicComponent = dynamic(() => import("../src/components/JsonEditor"), {
   ssr: false,
 });
 
@@ -14,7 +15,18 @@ export default function Home() {
       justify="center"
       align="top"
     >
-      <DynamicComponent></DynamicComponent>
+      <Stack
+        direction={["column", "column", "row", "row"]}
+        w="100%"
+        h="100%"
+        pb={4}
+        spacing={["40px", "40px", "20px", "20px"]}
+      >
+        <DynamicComponent
+          h="100%"
+          w={["100%", "100%", "100%", "100%"]}
+        ></DynamicComponent>
+      </Stack>
     </Layout>
   );
 }
