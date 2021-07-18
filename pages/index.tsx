@@ -9,7 +9,6 @@ import {
   Stack,
   useColorMode,
   Text,
-  Kbd,
   Divider,
   Menu,
   MenuButton,
@@ -18,8 +17,7 @@ import {
   Alert,
   AlertIcon,
 } from "@chakra-ui/react";
-import { ChevronDownIcon, EmailIcon } from "@chakra-ui/icons";
-import { FaAlignLeft, FaCompressArrowsAlt } from "react-icons/fa";
+import { ChevronDownIcon } from "@chakra-ui/icons";
 const DynamicComponent = dynamic(() => import("../src/components/JsonEditor"), {
   ssr: false,
 });
@@ -43,11 +41,11 @@ export default function Home() {
           w="100%"
           bg={colorMode === "dark" ? "dark.800" : "light.400"}
           borderTopRadius={8}
-          justifyItems="center"
+          alignItems="center"
           pl={1}
           justify="space-between"
         >
-          <HStack spacing={2} p={1}>
+          <HStack spacing={2} p={1} display={{ base: "none", sm: "flex" }}>
             <Button variant="outline" size="xs">
               Prettify
             </Button>
@@ -80,6 +78,40 @@ export default function Home() {
               </MenuList>
             </Menu>
           </HStack>
+          <HStack spacing={2} p={1} display={{ base: "flex", sm: "none" }}>
+            <Menu size="xs">
+              <MenuButton
+                as={Button}
+                rightIcon={<ChevronDownIcon />}
+                size="xs"
+                variant="outline"
+              >
+                Actions
+              </MenuButton>
+              <MenuList sx={{ zIndex: 9999 }}>
+                <MenuItem fontSize="xs">Prettify</MenuItem>
+                <MenuItem fontSize="xs">Minify</MenuItem>
+                <MenuItem fontSize="xs">Escape</MenuItem>
+                <MenuItem fontSize="xs">Unescape</MenuItem>
+              </MenuList>
+            </Menu>
+            <Menu size="xs">
+              <MenuButton
+                as={Button}
+                rightIcon={<ChevronDownIcon />}
+                size="xs"
+                variant="outline"
+              >
+                Download
+              </MenuButton>
+              <MenuList>
+                <MenuItem fontSize="xs">JSON</MenuItem>
+                <MenuItem fontSize="xs">XML</MenuItem>
+                <MenuItem fontSize="xs">YAML</MenuItem>
+              </MenuList>
+            </Menu>
+          </HStack>
+
           <Box>
             <Alert
               status="success"
@@ -90,7 +122,9 @@ export default function Home() {
               borderTopRightRadius={8}
             >
               <AlertIcon />
-              Valid JSON
+              <Text fontSize="xs" display={{ base: "none", sm: "flex" }}>
+                Valid JSON
+              </Text>
             </Alert>
           </Box>
         </Flex>
