@@ -34,7 +34,12 @@ const JsonEditor = (props: any) => {
         height="100%"
         width="100%"
         editorProps={{ $blockScrolling: true }}
-        style={{ borderRadius: 10 }}
+        style={{
+          borderBottomLeftRadius: 8,
+          borderBottomRightRadius: 8,
+          marginTop: 0,
+          paddingTop: 4,
+        }}
       />
     </Box>
   );

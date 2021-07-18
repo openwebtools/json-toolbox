@@ -1,12 +1,31 @@
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
 import Layout from "../src/components/Layout";
-import { Stack, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  HStack,
+  Stack,
+  useColorMode,
+  Text,
+  Kbd,
+  Divider,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Alert,
+  AlertIcon,
+} from "@chakra-ui/react";
+import { ChevronDownIcon, EmailIcon } from "@chakra-ui/icons";
+import { FaAlignLeft, FaCompressArrowsAlt } from "react-icons/fa";
 const DynamicComponent = dynamic(() => import("../src/components/JsonEditor"), {
   ssr: false,
 });
 
 export default function Home() {
+  const { colorMode } = useColorMode();
   const [srcText, setSrcText] = useState<any>({});
   return (
     <Layout
@@ -14,15 +33,76 @@ export default function Home() {
       p={4}
       justify="center"
       align="top"
+      direction="column"
+      pt={0}
     >
-      <Stack
-        direction={["column", "column", "row", "row"]}
-        w="100%"
-        h="100%"
-        pb={4}
-        spacing={["40px", "40px", "20px", "20px"]}
-      >
-        <DynamicComponent h="100%" w="100%"></DynamicComponent>
+      <Text align="center">A simple online JSON editor</Text>
+      <Stack direction="column" w="100%" h="100%" pb={4} spacing={0}>
+        <Flex
+          h="40px"
+          w="100%"
+          bg={colorMode === "dark" ? "dark.800" : "light.400"}
+          borderTopRadius={8}
+          justifyItems="center"
+          pl={1}
+          justify="space-between"
+        >
+          <HStack spacing={2} p={1}>
+            <Button variant="outline" size="xs">
+              Prettify
+            </Button>
+            <Button variant="outline" size="xs">
+              Minify
+            </Button>
+            <Button variant="outline" size="xs">
+              Escape
+            </Button>
+            <Button variant="outline" size="xs">
+              Unescape
+            </Button>
+            <Divider orientation="vertical" />
+            <Button variant="outline" size="xs">
+              Copy
+            </Button>
+            <Menu size="xs">
+              <MenuButton
+                as={Button}
+                rightIcon={<ChevronDownIcon />}
+                size="xs"
+                variant="outline"
+              >
+                Download
+              </MenuButton>
+              <MenuList>
+                <MenuItem fontSize="xs">JSON</MenuItem>
+                <MenuItem fontSize="xs">XML</MenuItem>
+                <MenuItem fontSize="xs">YAML</MenuItem>
+              </MenuList>
+            </Menu>
+          </HStack>
+          <Box>
+            <Alert
+              status="success"
+              alignItems="center"
+              justifyContent="center"
+              textAlign="center"
+              height="40px"
+              borderTopRightRadius={8}
+            >
+              <AlertIcon />
+              Valid JSON
+            </Alert>
+          </Box>
+        </Flex>
+        <DynamicComponent
+          h="100%"
+          w="100%"
+          m={0}
+          border="1px"
+          borderTopWidth="0px"
+          borderColor={colorMode === "dark" ? "dark.800" : "light.400"}
+          borderBottomRadius={8}
+        ></DynamicComponent>
       </Stack>
     </Layout>
   );

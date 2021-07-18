@@ -22,7 +22,8 @@ const Toolbar = (props: any) => {
     <Flex
       as="nav"
       align="center"
-      p={4}
+      px={4}
+      py={2}
       {...props}
       justify="space-between"
       w="100%"
