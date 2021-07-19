@@ -24,10 +24,11 @@ const DynamicComponent = dynamic(() => import("../src/components/JsonEditor"), {
 
 export default function Home() {
   const { colorMode } = useColorMode();
-  const [srcText, setSrcText] = useState<any>({});
+  const [srcText, setSrcText] = useState<string>();
   const [jsonValid, setJsonValid] = useState<boolean>(false);
   const onChange = (value) => {
     setJsonValid(validateJson(value));
+    setSrcText(value);
   };
 
   const validateJson = (jsonString: string) => {

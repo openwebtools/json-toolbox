@@ -1,5 +1,5 @@
 import { Box, useColorMode } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-json";
 import "ace-builds/src-noconflict/theme-twilight";
@@ -9,19 +9,10 @@ const JsonEditor = (props: any) => {
   const { colorMode } = useColorMode();
   const [srcObj, setSrcObj] = useState<any>({});
   const [isErrJson, setIsErrJson] = useState<boolean>(false);
-  const onChange = (newValue) => {
+  const onChange = (newValue: string) => {
     props.onChange?.(newValue);
-    console.log("change", newValue);
   };
-  useEffect(() => {
-    try {
-      const obj = JSON.parse(props.src);
-      setIsErrJson(false);
-      setSrcObj(obj);
-    } catch (e) {
-      setIsErrJson(true);
-    }
-  }, [props.src]);
+
   return (
     <Box {...props}>
       <AceEditor
