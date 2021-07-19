@@ -10,6 +10,7 @@ const JsonEditor = (props: any) => {
   const [srcObj, setSrcObj] = useState<any>({});
   const [isErrJson, setIsErrJson] = useState<boolean>(false);
   const onChange = (newValue) => {
+    props.onChange?.(newValue);
     console.log("change", newValue);
   };
   useEffect(() => {
@@ -40,6 +41,7 @@ const JsonEditor = (props: any) => {
           marginTop: 0,
           paddingTop: 4,
         }}
+        debounceChangePeriod={700}
       />
     </Box>
   );

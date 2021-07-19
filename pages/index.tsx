@@ -25,6 +25,21 @@ const DynamicComponent = dynamic(() => import("../src/components/JsonEditor"), {
 export default function Home() {
   const { colorMode } = useColorMode();
   const [srcText, setSrcText] = useState<any>({});
+  const [jsonValid, setJsonValid] = useState<boolean>(false);
+  const onChange = (value) => {
+    setJsonValid(validateJson(value));
+  };
+
+  const validateJson = (jsonString: string) => {
+    try {
+      var o = JSON.parse(jsonString);
+      if (o && typeof o === "object") {
+        return o;
+      }
+    } catch (e) {}
+
+    return false;
+  };
   return (
     <Layout
       title="JSON Toolkit | Open Web Tools"
@@ -33,6 +48,7 @@ export default function Home() {
       align="top"
       direction="column"
       pt={0}
+      pb={2}
     >
       <Text align="center">A simple online JSON editor</Text>
       <Stack direction="column" w="100%" h="100%" pb={4} spacing={0}>
@@ -114,7 +130,7 @@ export default function Home() {
 
           <Box>
             <Alert
-              status="success"
+              status={jsonValid ? "success" : "error"}
               alignItems="center"
               justifyContent="center"
               textAlign="center"
@@ -123,7 +139,7 @@ export default function Home() {
             >
               <AlertIcon />
               <Text fontSize="xs" display={{ base: "none", sm: "flex" }}>
-                Valid JSON
+                {jsonValid ? "Valid" : "Invalid"} JSON
               </Text>
             </Alert>
           </Box>
@@ -136,6 +152,7 @@ export default function Home() {
           borderTopWidth="0px"
           borderColor={colorMode === "dark" ? "dark.800" : "light.400"}
           borderBottomRadius={8}
+          onChange={onChange}
         ></DynamicComponent>
       </Stack>
     </Layout>
