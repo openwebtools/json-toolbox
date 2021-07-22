@@ -130,19 +130,21 @@ export default function Home() {
           </HStack>
 
           <Box>
-            <Alert
-              status={jsonValid ? "success" : "error"}
-              alignItems="center"
-              justifyContent="center"
-              textAlign="center"
-              height="40px"
-              borderTopRightRadius={8}
-            >
-              <AlertIcon />
-              <Text fontSize="xs" display={{ base: "none", sm: "flex" }}>
-                {jsonValid ? "Valid" : "Invalid"} JSON
-              </Text>
-            </Alert>
+            {srcText ? (
+              <Alert
+                status={jsonValid ? "success" : "error"}
+                alignItems="center"
+                justifyContent="center"
+                textAlign="center"
+                height="40px"
+                borderTopRightRadius={8}
+              >
+                <AlertIcon />
+                <Text fontSize="xs" display={{ base: "none", sm: "flex" }}>
+                  {jsonValid ? "Valid" : "Invalid"} JSON
+                </Text>
+              </Alert>
+            ) : null}
           </Box>
         </Flex>
         <DynamicComponent
